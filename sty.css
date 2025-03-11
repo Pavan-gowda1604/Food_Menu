@@ -1,0 +1,88 @@
+body {
+    font-family: Arial, sans-serif;
+    background-image: url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8cmVzdGF1cmFudHxlbnwwfHwwfHx8MA%3D%3D');
+    margin: 0;
+    padding: 0;
+    background-color: #f8f8f8;
+    text-align: center;
+}
+.marquee {
+    
+    color: white;
+    padding: 35px;
+    font-size: 20px;
+    white-space: nowrap;
+    overflow: hidden;
+    position: relative;
+}
+.marquee span {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: block;
+    animation: marquee 10s linear infinite;
+}
+@keyframes marquee {
+    from { transform: translateX(100%); }
+    to { transform: translateX(-100%); }
+}
+.food-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    padding: 20px;
+}
+.food-item {
+    width: 200px;
+    height: 290px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    text-align: center;
+    transition: transform 0.3s;
+}
+.food-item:hover {
+    transform: scale(1.1);
+}
+.food-item img {
+    width: 100%;
+    height: 140px;
+    object-fit: cover;
+}
+.food-item h3 {
+    margin: 10px 0;
+    font-size: 18px;
+}
+.order-btn {
+    background: #ff5722;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+.order-btn:hover {
+    background: #e64a19;
+}
+
+/* Moving Images at Bottom */
+.image-marquee {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background: rgba(6, 6, 6, 0.6);
+    padding: 10px 0;
+    overflow: hidden;
+}
+
+.image-marquee marquee {
+    white-space: nowrap;
+}
+
+.image-marquee img {
+    height: 300px; /* Adjust image size */
+    margin: 0 15px;
+    border-radius: 10px;
+}

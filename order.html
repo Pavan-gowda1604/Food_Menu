@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirm Your Order</title>
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 50px;
+        }
+        .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: #4CAF50;
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+            font-size: 18px;
+        }
+        .popup.show {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Confirm Your Order</h2>
+
+    <div class="order-container">
+        <img id="foodImage" src="" alt="Food Image" class="food-img">
+        <div class="order-details">
+            <label>Food Item:</label>
+            <input type="text" id="foodItem" readonly>
+
+            <label>Price (₹):</label>
+            <input type="text" id="foodPrice" readonly>
+
+            <label>Quantity:</label>
+            <input type="number" id="quantity" value="1" min="1">
+
+            <label>Total Price (₹):</label>
+            <input type="text" id="totalPrice" readonly>
+
+            <button type="submit" id="confirmOrder">Confirm Order</button>
+        </div>
+    </div>
+
+    
+
+   
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const params = new URLSearchParams(window.location.search);
+            const item = params.get('item') || "Unknown";
+            const price = parseFloat(params.get('price')) || 0;
+            const image = params.get('image') || "";
+    
+            const foodItemInput = document.getElementById("foodItem");
+            const foodPriceInput = document.getElementById("foodPrice");
+            const totalPriceInput = document.getElementById("totalPrice");
+            const quantityInput = document.getElementById("quantity");
+            const foodImageElement = document.getElementById("foodImage");
+            const confirmOrderBtn = document.getElementById("confirmOrder");
+    
+            // Set initial values
+            foodItemInput.value = item;
+            foodPriceInput.value = price.toFixed(2);
+            totalPriceInput.value = price.toFixed(2);
+            if (image) foodImageElement.src = image;
+    
+            // Set background image if valid
+            if (image && image.trim() !== "") {
+                document.body.style.backgroundImage = `url('${image}')`;
+                document.body.style.backgroundSize = "cover";
+                document.body.style.backgroundPosition = "center";
+            }
+    
+            // Function to update total price
+            const updateTotalPrice = () => {
+                let qty = Math.max(parseInt(quantityInput.value) || 1, 1); // Ensure minimum 1
+                totalPriceInput.value = (qty * price).toFixed(2);
+            };
+    
+            quantityInput.addEventListener("input", updateTotalPrice);
+    
+            // Handle order confirmation
+            confirmOrderBtn.addEventListener("click", () => {
+                alert("Order Confirmed! Thank you for your purchase.");
+            });
+        });
+    </script>
+    
+
+</body>
+</html>
